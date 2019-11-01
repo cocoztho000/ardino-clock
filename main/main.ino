@@ -30,7 +30,6 @@ int shiftPins[] = {
   0, 1, 2, 3, 4, 5, 6, 7,  //7th: 49=1
   8, 9, 10, 11, 12, 13, 14, 15, //8th: 57=8
 };
-int shiftPinsCount = 64;
 
 // minuteShiftPins The position in this array maps to the minute hand
 // position in the shiftPins array
@@ -44,13 +43,11 @@ int minuteShiftPins[] = {
   63, 62, 61, 60, 58, 57, 56,   // 7
   55, 54, 52, 51, 50, 49, 48,   // 7
 };
-int maxShiftMinuteHands = 54;
 
 // hourShiftPins maps to the position of the hour hand in the shiftPins array
 int hourShiftPins[] = {
   3, 13, 23, 17, 27, 45, 40, 33, 59, 53,
 };
-int hourShiftPinsCount = 10;
 
 int arduinoPins[] = {
   9, 8, 6, 7, 5, 4, 3, 2,
@@ -65,25 +62,7 @@ int arduinoPinsMinuteHandsCount = 6;
 int arduinoPinsHourHands[] = {
   2, 7,
 };
-int arduinoPinsHourHandsCount = 2;
 
-bool isArduinoPinsHourPin(int pin) {
-  for (int k = 0; k < hourShiftPinsCount; k++) {
-    if (hourShiftPins[k] == pin) {
-      return true;
-    }
-  }
-  return false;
-}
-
-bool isShiftPinsHourPin(int pin) {
-  for (int k = 0; k < hourShiftPinsCount; k++) {
-    if (hourShiftPins[k] == pin) {
-      return true;
-    }
-  }
-  return false;
-}
 
 void setup() {
   // NOTE: ONLY ENABLE THIS FOR DEBUGGING
@@ -124,7 +103,7 @@ void writeMinute(int clockHandLocation) {
     digitalWrite(arduinoPins[arduinoPinsMinuteHands[previousMinute]], LOW);
   } else {
     // Decrement the number of pins used on the board
-    int realLocation = previousMinute - 6;
+    int realLocation = previousMinute - arduinoPinsMinuteHandsCount;
 
     // Turn off previous led
     if (shiftPins[minuteShiftPins[realLocation]] == 34) {
@@ -139,7 +118,7 @@ void writeMinute(int clockHandLocation) {
     digitalWrite( arduinoPins[arduinoPinsMinuteHands[clockHandLocation]], HIGH);
   } else {
     // Decrement the number of pins used on the board
-    int realLocation = clockHandLocation - 6;
+    int realLocation = clockHandLocation - arduinoPinsMinuteHandsCount;
 
     // Turn on new led
     if (shiftPins[minuteShiftPins[realLocation]] == 34) {
