@@ -194,16 +194,27 @@ void startupSequence() {
   }
 }
 
+long second = (long)1000;
+long minute = (long)60 * second;
+
+int currentHour = 2;
+int currentMinute = 33;
+
 void loop() {
+
   // Write a random pin low to turn off all LEDs managed by the shift register
   //  regWrite(59, LOW);
-  for (int hour = 1; hour <= 12; hour++) {
-    for (int minute = 1; minute <= 60; minute++) {
-      writeTime(hour, minute);
-      delay(10);
+  for (; currentHour <= 12; currentHour++) {
+    for (; currentMinute <= 60; currentMinute++) {
+      writeTime(currentHour, currentMinute);
+      delay(minute);
     }
-    writeTime(hour, 1);
+    writeTime(currentHour, 1);
   }
+
+  // Reset the time
+  currentHour = 1;
+  currentMinute = 1;
 }
 
 // Generic function to write to the shift registers
