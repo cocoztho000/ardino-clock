@@ -1,3 +1,9 @@
+// ----------------------------------------------------------
+// *** UPDATE THE START TIME HERE ***
+int currentHour = 6;
+int currentMinute = 21;
+// ----------------------------------------------------------
+
 int latchPin = 11;
 int clockPin = 10;
 int dataPin = 12;
@@ -27,8 +33,8 @@ int shiftPins[] = {
   32, 33, 34, 35, 36, 37, 38, 39, //4th: 33=25
   16, 17, 18, 19, 20, 21, 22, 23, //5th: 33=16
   24, 25, 26, 27, 28, 29, 30, 31, //6th: 41=24
-  0, 1, 2, 3, 4, 5, 6, 7,  //7th: 49=1
-  8, 9, 10, 11, 12, 13, 14, 15, //8th: 57=8
+  0, 1, 2, 3, 4, 5, 6, 7,         //7th: 49=1
+  8, 9, 10, 11, 12, 13, 14, 15,   //8th: 57=8
 };
 
 // minuteShiftPins The position in this array maps to the minute hand
@@ -196,9 +202,6 @@ void startupSequence() {
 
 long second = (long)1000;
 long minute = (long)60 * second;
-
-int currentHour = 2;
-int currentMinute = 33;
 
 void loop() {
 
